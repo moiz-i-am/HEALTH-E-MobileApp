@@ -39,7 +39,7 @@ export default class Login extends Component {
   watchAuthState(navigation) {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user != undefined) {
-        navigation.navigate('Home');
+        navigation.navigate('Maps');
       }
     });
   }

@@ -5,8 +5,6 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER
 const styles = StyleSheet.create({
  container: {
    ...StyleSheet.absoluteFillObject,
-   height: 400,
-   width: 400,
    justifyContent: 'flex-end',
    alignItems: 'center',
  },
@@ -30,3 +28,11 @@ export default Maps = () => (
      </MapView>
    </View>
 );
+
+Maps.navigationOptions = {
+  title: 'Map',
+  headerTitleStyle: { 
+    textAlign:"center", 
+    flex:1,
+},
+};

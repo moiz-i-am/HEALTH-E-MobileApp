@@ -27,7 +27,7 @@ export default class Calander extends Component {
             <CalendarPicker
               onDateChange={this.onDateChange}
             />
-            <View>
+            <View style={{padding:20}}>
               <Text>SELECTED DATE:{ startDate }</Text>
             </View>
           </View>
@@ -48,5 +48,6 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor: '#FFFFFF',
     },
+
   });
 

@@ -2,14 +2,14 @@ import React from 'react';
 import { ScrollView, StyleSheet,Text } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
 
-export default function LinksScreen() {
+export default function ProfileScreen() {
   return (
     <Text>hello</Text>
   );
 }
 
-LinksScreen.navigationOptions = {
-  title: 'Discover',
+ProfileScreen.navigationOptions = {
+  title: 'Profile',
   headerTitleStyle: { 
     textAlign:"center", 
     flex:1 

@@ -3,8 +3,8 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import DiscoverScreen from '../screens/DiscoverScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import Calander from './../screens/Calander';
 import Maps from './../screens/Maps';
@@ -14,15 +14,15 @@ const config = Platform.select({
   default: {},
 });
 
-const HomeStack = createStackNavigator(
+const DiscoverStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    Discover: DiscoverScreen,
   },
   config
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+DiscoverStack.navigationOptions = {
+  tabBarLabel: 'Discover',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -35,23 +35,23 @@ HomeStack.navigationOptions = {
   ),
 };
 
-HomeStack.path = '';
+DiscoverStack.path = '';
 
-const LinksStack = createStackNavigator(
+const ProfileStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Profile: ProfileScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+ProfileStack.navigationOptions = {
+  tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
   ),
 };
 
-LinksStack.path = '';
+ProfileStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
@@ -106,11 +106,11 @@ CalanderStack.path = '';
 
 
 const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
   MapStack,
-  CalanderStack
+  DiscoverStack,
+  CalanderStack,
+  ProfileStack,
+  SettingsStack,
 });
 
 tabNavigator.path = '';

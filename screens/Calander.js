@@ -27,7 +27,6 @@ export default class Calander extends Component {
             <CalendarPicker
               onDateChange={this.onDateChange}
             />
-     
             <View>
               <Text>SELECTED DATE:{ startDate }</Text>
             </View>

@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     height: 56,
     width: '90%',
     borderWidth: 1,
-    borderColor: '#4CAF50',
+    borderColor: '#007ACC',
     borderRadius: 15,
     marginTop: 20
   },
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 56,
     padding: 15,
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#007ACC',
     borderRadius: 15,
     marginTop: 40,
     color:'#ffffff'

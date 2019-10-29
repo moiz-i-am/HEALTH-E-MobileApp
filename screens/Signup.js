@@ -22,8 +22,18 @@ export default class Signup extends Component {
     header: null
   }
 
+  validateEmail = (email) => {
+    var re = /.+@(mit)\.edu$/;
+      return re.test(email);
+  };
+
   submit() {
-    firebaseAPI.createUser(this.state.email, this.state.password)
+    if (!this.validateEmail(this.state.email) || email == null) {
+      alert("Please use email with mit domain");
+    } else {
+      firebaseAPI.createUser(this.state.email, this.state.password)
+    }
+    
   }
 
   render() {
@@ -45,7 +55,7 @@ export default class Signup extends Component {
           onChangeText={(password) => this.setState({ password })} />
 
         <TextInput style={styles.textInputStyle}
-          placeholder="Password"
+          placeholder="Confirm Password"
           secureTextEntry={true}
           underlineColorAndroid='transparent'
            />
@@ -70,7 +80,7 @@ const styles = StyleSheet.create({
     height: 56,
     width: '90%',
     borderWidth: 1,
-    borderColor: '#4CAF50',
+    borderColor: '#007ACC',
     borderRadius: 15,
     marginTop: 20
   },
@@ -80,7 +90,7 @@ const styles = StyleSheet.create({
     width: '90%',
     height: 56,
     padding: 15,
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#007ACC',
     borderRadius: 15,
     marginTop: 40,
     color:'#ffffff'

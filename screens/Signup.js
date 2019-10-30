@@ -15,6 +15,7 @@ export default class Signup extends Component {
     state = {
       email: '',
       password: '',
+      newpassword: '',
     }
   }
 
@@ -28,12 +29,20 @@ export default class Signup extends Component {
   };
 
   submit() {
-    if (!this.validateEmail(this.state.email) || email == null) {
-      alert("Please use email with mit domain");
+    if (this.state.email != '') {
+      //Check for the Name TextInput
+      if (this.state.password != '') {
+      if (!this.validateEmail(this.state.email)) {
+        alert("Please use email with mit domain");
+      } else {
+        firebaseAPI.createUser(this.state.email, this.state.password)
+      }
     } else {
-      firebaseAPI.createUser(this.state.email, this.state.password)
+      alert('Please Enter Email');
     }
-    
+  } else {
+    alert('Please Enter Name');
+  }
   }
 
   render() {
@@ -58,7 +67,7 @@ export default class Signup extends Component {
           placeholder="Confirm Password"
           secureTextEntry={true}
           underlineColorAndroid='transparent'
-           />
+          onChangeText={(newpassword) => this.setState({ newpassword })} />
 
         <Text style={styles.button} onPress={() => this.submit()}>Sign up</Text>
 

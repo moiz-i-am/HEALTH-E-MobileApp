@@ -69,7 +69,7 @@ export default class Login extends Component {
     })
   }
   onLoginFailure(errorMessage) {
-    this.setState({ error: errorMessage, loading: false })
+    alert("password not correct");
   }
 
   render() {

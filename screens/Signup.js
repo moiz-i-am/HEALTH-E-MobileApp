@@ -24,7 +24,7 @@ export default class Signup extends Component {
   }
 
   validateEmail = (email) => {
-    var re = /.+@(mit)\.edu$/;
+    var re = /.+@\./;
       return re.test(email);
   };
 

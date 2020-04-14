@@ -5,11 +5,14 @@ import {
   View,
   TextInput
 } from 'react-native';
-import * as firebaseAPI from '../firebaseAuths/firebaseAPI';
-import firebase from 'firebase';
+
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { loginUser } from "../auth/authActions";
 
 
-export default class Login extends Component {
+
+class Login extends Component {
 
   constructor(props) {
     super(props);
@@ -28,40 +31,51 @@ export default class Login extends Component {
     this.props.navigation.navigate('Signup');
   }
 
-  // LoginUser = () => {
-  //   firebaseAPI.signInUser(this.state.email, this.state.password)
-  // }
+
 
   componentDidMount() {
-    this.watchAuthState(this.props.navigation)
+    //this.watchAuthState(this.props.navigation)
   }
 
-  watchAuthState(navigation) {
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user != undefined) {
-        navigation.navigate('Maps');
+
+  validate = () => {
+    let emailError = "";
+    var pattern = new RegExp(
+      /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
+    );
+    if (!pattern.test(this.state.email)) {
+      // if (!this.state.email.includes("@")) {
+      emailError = "* Please enter valid email address";
+    }
+    if (
+      !this.state.password.match(
+        /^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/
+      )
+    )
+      if (emailError) {
+        this.setState({ emailError });
+        return false;
       }
-    });
-  }
+    return true;
+  };
 
   onButtonPress() {
     this.setState({ error: '', loading: true })
     const { email, password } = this.state;
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(this.onLoginSuccess.bind(this))
-      .catch(() => {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then(this.onLoginSuccess.bind(this))
-          .catch((error) => {
-            let errorCode = error.code
-            let errorMessage = error.message;
-            if (errorCode == 'auth/weak-password') {
-              this.onLoginFailure.bind(this)('Weak password!')
-            } else {
-              this.onLoginFailure.bind(this)(errorMessage)
-            }
-          });
-      });
+
+    const userData = {
+      email: this.state.email,
+      password: this.state.password
+    };
+
+    const isValid = this.validate();
+    if (isValid) {
+      this.props.loginUser(userData);
+      console.log("loggedin");
+      this.props.navigation.navigate('Maps');
+      // clear form for removing error if fields are valid
+      //this.setState(initialState);
+    }
   }
   onLoginSuccess() {
     this.setState({
@@ -130,3 +144,16 @@ const styles = StyleSheet.create({
 
 
 });
+
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+
+export default connect(mapStateToProps, { loginUser })(Login);

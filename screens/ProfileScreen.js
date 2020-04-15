@@ -15,7 +15,7 @@ export default class ProfileScreen extends Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
-<View style={styles.container}>
+        <View style={styles.container}>
           <View style={styles.header}></View>
           {image &&
           <Image source={{ uri: image }} style={styles.avatar} />}

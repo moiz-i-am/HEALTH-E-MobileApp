@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import {Button,InteractionManager,View,Text,StyleSheet} from 'react-native';
 import { ExpoConfigView } from '@expo/samples';
-import * as firebaseAPI from './../firebaseAuths/firebaseAPI';
 import { NavigationEvents } from 'react-navigation';
 
 

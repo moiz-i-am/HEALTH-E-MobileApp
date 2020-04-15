@@ -5,8 +5,6 @@ import {
   View,
   TextInput,
 } from 'react-native';
-import firebase from 'firebase';
-import * as firebaseAPI from '../firebaseAuths/firebaseAPI';
 
 export default class Signup extends Component {
 

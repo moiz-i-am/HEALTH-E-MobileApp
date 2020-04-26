@@ -2,7 +2,7 @@ import {
   GET_USER_DATA,
   CLEAR_USER_DATA,
   UPDATE_USER_DATA
-} from "../auth/types";
+} from "../actions/types";
 
 export default function(state = {}, action) {
   switch (action.type) {

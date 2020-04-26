@@ -1,9 +1,6 @@
-import * as WebBrowser from 'expo-web-browser';
 import React, { Component } from 'react';
 import axios from 'axios';
-import {
-  Text, View, FlatList,
-} from 'react-native';
+import { View, FlatList } from 'react-native';
 import DoctorListItem from '../components/DoctorListItem';
 
 class DiscoverScreen extends Component {
@@ -14,12 +11,11 @@ class DiscoverScreen extends Component {
       doctors: []
     };
   }
-
+  
   componentDidMount(){
-    axios.get(`/v1/users`).then(res => {
+    axios.get("http://192.168.1.5:3001/v1/users").then(res => {
       this.setState({ doctors: res.data});
-      alert("res: " + res);
-    });
+    }).catch(error => console.log(error));
   }
 
   render(){
@@ -27,12 +23,20 @@ class DiscoverScreen extends Component {
       <View>
         <FlatList
           data={this.state.doctors}
-          renderItem={({item}) => (<DoctorListItem 
+          renderItem={({item}) => (<DoctorListItem
+                                        navigation={this.props.navigation}
                                         picture={item.picture}
                                         name={item.name}
+                                        specialization={item.specializations}
                                         rating={item.rating}
                                         price={item.price}
-                                        location={item.location}
+                                        docId={item.id}
+                                        location={ item.location_city +
+                                          ", " +
+                                          item.location_state +
+                                          ", " +
+                                          item.location_country
+                                        }
                                       />
                                     )}
           keyExtractor={item => item.id}
@@ -45,7 +49,7 @@ class DiscoverScreen extends Component {
 export default DiscoverScreen;
 
 DiscoverScreen.navigationOptions = {
-  title: 'Discover',
+  title: 'Doctors',
   headerTitleStyle: { 
     textAlign:"center", 
     flex:1 

@@ -22,7 +22,7 @@ const DiscoverStack = createStackNavigator(
 );
 
 DiscoverStack.navigationOptions = {
-  tabBarLabel: 'Discover',
+  tabBarLabel: 'Doctors',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

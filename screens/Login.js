@@ -3,40 +3,55 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput
+  TextInput,
+  Alert,
+  Button
 } from 'react-native';
 
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { loginUser } from "../auth/authActions";
+import { loginUser } from "../actions/authActions";
+import { Input, Icon } from 'react-native-elements';
 
-
+const initialState = {
+  email: "",
+  password: "",
+  emailError: "",
+  passwordError: "",
+  errors: {}
+};
 
 class Login extends Component {
 
   constructor(props) {
     super(props);
-    state = {
-      email: '',
-      password: '',
-    }
+    this.state = initialState;
   }
 
   static navigationOptions = {
     header: null
   }
 
-  onSignupListener = () => {
-    //Alert.alert("Alert", "Button pressed "+viewId);
-    this.props.navigation.navigate('Signup');
+  componentWillReceiveProps(nextProps, {navigation}) {
+    if (nextProps.auth.isAuthenticated) {
+      const { user } = nextProps.auth;
+      this.props.navigation.navigate('Maps');
+      // push user to signup when they login
+    }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
   }
-
-
 
   componentDidMount() {
-    //this.watchAuthState(this.props.navigation)
+    // If logged in and user navigates to Login page, should redirect them to dashboard
+    if (this.props.auth.isAuthenticated) {
+      const { user } = this.props.auth;
+      this.props.navigation.navigate('Maps');
+    }
   }
-
 
   validate = () => {
     let emailError = "";
@@ -60,21 +75,23 @@ class Login extends Component {
   };
 
   onButtonPress() {
-    this.setState({ error: '', loading: true })
-    const { email, password } = this.state;
-
     const userData = {
       email: this.state.email,
       password: this.state.password
     };
 
     const isValid = this.validate();
+    
     if (isValid) {
       this.props.loginUser(userData);
-      console.log("loggedin");
-      this.props.navigation.navigate('Maps');
+
       // clear form for removing error if fields are valid
-      //this.setState(initialState);
+      this.setState(initialState);
+
+      //this.props.navigation.navigate('Maps');
+    }
+    else{
+      Alert.alert("Alert", "Invalid Credentials ");
     }
   }
   onLoginSuccess() {
@@ -90,21 +107,43 @@ class Login extends Component {
     return (
       <View style={styles.container}>
 
-        <Text style={{ alignSelf: "flex-start", fontWeight: "bold", fontSize: 24, paddingLeft: 20 }}>Sign In</Text>
+        <Text style={{ alignSelf: 'center', fontWeight: "bold", fontSize: 24, marginBottom: 10 }}>Sign In</Text>
 
-        <TextInput style={styles.textInputStyle}
-          placeholder="Email"
+        <Input inputContainerStyle={styles.textInputStyle}
+          leftIcon={
+            <Icon
+              iconStyle={styles.icon}
+              name='mail'
+              size={22}
+              color='#9458AE'
+            />
+          }
+          label='Your Email Address'
+          labelStyle={styles.label}
+          placeholder="email@address.com"
           keyboardType="email-address"
           underlineColorAndroid='transparent'
           onChangeText={(email) => this.setState({ email })} />
 
-        <TextInput style={styles.textInputStyle}
+        <Input inputContainerStyle={styles.textInputStyle}
+          leftIcon={
+            <Icon
+              name='lock'
+              size={22}
+              color='#9458AE'
+              iconStyle={styles.icon}
+            />
+          }
           placeholder="Password"
+          label='Password'
+          labelStyle={styles.label}
           secureTextEntry={true}
           underlineColorAndroid='transparent'
           onChangeText={(password) => this.setState({ password })} />
 
-        <Text style={styles.button} onPress={this.onButtonPress.bind(this)}>Login</Text>
+        <View style={styles.button}>
+          <Button color='#9458AE' title='Login' onPress={this.onButtonPress.bind(this)}/>
+        </View>
         <Text style={{ marginTop: 30 }} onPress={() => this.onSignupListener()}>Not Registered? Signup</Text>
         
       </View>
@@ -119,27 +158,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#ffffff',
+    marginRight: 20,
+    marginLeft: 20
   },
   textInputStyle: {
-    paddingLeft: 18,
-    padding: 18,
-    height: 56,
-    width: '90%',
-    borderWidth: 1,
-    borderColor: '#007ACC',
-    borderRadius: 15,
-    marginTop: 20
+    borderColor: '#9458AE'
+  },
+  icon: {
+    marginLeft: -15,
+    marginRight: 10
+  },
+  label:{
+    bottom: 0,
+    marginTop: 15,
   },
   button: {
-    textAlign: 'center',
-    marginHorizontal: 0,
-    width: '90%',
-    height: 56,
-    padding: 15,
-    backgroundColor: '#007ACC',
+    alignSelf: 'stretch',
     borderRadius: 15,
     marginTop: 40,
-    color:'#ffffff'
+    marginLeft: 5,
+    marginRight: 5
   },
 
 

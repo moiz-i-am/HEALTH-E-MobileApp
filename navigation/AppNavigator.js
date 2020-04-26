@@ -4,6 +4,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import MainTabNavigator from './MainTabNavigator';
 import Login from './../screens/Login';
 import Signup from './../screens/Signup';
+import DoctorProfile from './../components/DoctorProfile';
 
 export default createAppContainer(
   createSwitchNavigator({
@@ -12,5 +13,6 @@ export default createAppContainer(
     Login:Login,
     Signup:Signup,
     Main: MainTabNavigator,
+    DoctorProfile: DoctorProfile
   })
 );

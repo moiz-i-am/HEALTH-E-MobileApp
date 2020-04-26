@@ -1,4 +1,4 @@
-import { GET_TIME_DATA } from "../auth/types";
+import { GET_TIME_DATA } from "../actions/types";
 
 export default function(state = {}, action) {
   switch (action.type) {

@@ -59,7 +59,7 @@ export const loginUser = user => dispatch => {
       token = JSON.stringify(token);
 
       AsyncStorage.setItem('jwtToken', token)
-      console.log(token);
+      //console.log(token);
       // localStorage.setItem("jwtToken", token);
       setAuthToken(token);
       const decode = jwt_decode(token);

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Rating, Header, Avatar, Overlay } from 'react-native-elements';
-import { StyleSheet, View, Text, Button, FlatList, AsyncStorage } from 'react-native';
+import { StyleSheet, View, Text, Button, AsyncStorage, ScrollView } from 'react-native';
 import ReactNativeCalendarStrip from 'react-native-calendar-strip'; 
 import { connect } from "react-redux";
 import { getDoctorTimeSlots } from "../actions/schedulingActions";
+import { createAppointmentBooking } from "../actions/bookingActions";
 import moment from 'moment';
-import TimeSlotListItem from './TimeSlotListItem';
+import _ from 'lodash';
 
 const styles = StyleSheet.create({
     subView1: {
@@ -39,6 +40,30 @@ const styles = StyleSheet.create({
     },
     price: {
         fontSize: 20
+    },
+    listitem: {
+      marginTop: 10
+    },
+    confirmModalView: {
+      textAlign: 'center',
+      alignItems:'center',
+      fontSize: 30,
+    },
+    confirmButtonsView: {
+      marginTop: 20,
+      flexDirection: 'row',
+      justifyContent:'space-evenly'
+    },
+    confirmModalHeader: {
+      textAlign:'center',
+      alignItems:'center',
+      paddingTop: 30,
+      height: 100,
+      marginBottom: 20,
+      backgroundColor: '#9458AE',
+      fontWeight: "bold", 
+      fontSize: 24,
+      color: '#ffffff'
     }
 });
 
@@ -48,9 +73,11 @@ class DoctorProfile extends Component {
         super(props);
         this.state = {
             isVisible: false,
+            confirmIsVisible: false,
             token: "",
+            patientName: "",
             patientId: "",
-            name: "",
+            docName: "",
             docId: "",
             choosenSlot: "",
             date: "",
@@ -58,8 +85,7 @@ class DoctorProfile extends Component {
             location: "",
             price: "",
             rating: 0,
-            picture: "",
-            schedules: [],
+            picture: "https://cdn0.iconfinder.com/data/icons/user-pictures/100/unknown2-512....",
             open: false,
             success: false
         }
@@ -69,68 +95,135 @@ class DoctorProfile extends Component {
         this.setState({isVisible: true});
     }
 
-    componentDidMount() {
-      const { navigation } = this.props;  
+    handleClose = () => this.setState({  });
+
+    handleConfirm = () => {
+      if (this.props.auth.isAuthenticated) {
+        const bookingData = {
+          date: this.state.date,
+          doctor: this.state.docId,
+          patient: this.state.patientId,
+          timeSlot: this.state.choosenSlot
+        };
+
+      if (
+        this.state.role === "doctor" ||
+        this.state.role === "lab" ||
+        this.state.role === "hospital" ||
+        this.state.role === "admin"
+      ) {
+        return alert(
+          `sorry you are ${this.state.role} you cannot make booking form this account !!!`
+        );
+      } else {
+        this.props.createAppointmentBooking(bookingData, this.state.token);
+        // console.log("pat: " + bookingData.patient + "doc: " + bookingData.doctor);
+        console.log('booking done....');
+        this.setState({ confirmIsVisible: false, success: true });
+        setTimeout(() => {
+          this.setState({ success: false });
+        }, 3000);
+      }
+    } else {
+      console.log("ERROR: not authanticated");
+    }
+  };
+
+  handleCancel = () => this.setState({ success: false, confirmIsVisible: false });
+
+    async componentDidMount() {
+      const { navigation } = this.props;
 
         this.setState({
-          name: navigation.getParam('name'),
+          docName: navigation.getParam('name'),
           location: navigation.getParam('location'),
           price: navigation.getParam('price'),
           rating: navigation.getParam('rating'),
           picture: navigation.getParam('picture'),
           docId: navigation.getParam('docId'),
-          schedules: this.props.schedule
         })
-        userDetails = AsyncStorage.getItem('jwtToken');
-        if (AsyncStorage.getItem('jwtToken')) {
+        const userDetails = await AsyncStorage.getItem('jwtToken');
+        if (userDetails !== null) {
+          const user = JSON.parse(userDetails);
+
+          console.log(user);
+
           this.setState({
-            token: userDetails.accessToken,
-            patientId: userDetails.id,
-            name: userDetails.name,
-            role: userDetails.role
-          });
+            token: user.token.accessToken,
+            patientId: user.user.id,
+            patientName: user.user.name,
+            role: user.user.role
+          })
+          
         } else {
+
+          console.log("no data...");
+
           this.setState({
             token: "",
             patientId: "",
             role: "",
-            name: ""
-          });
+            patientName: ""
+          })
         }
-      }
+    }
 
     onBackPress(){
         
     }
 
-    dateSelected(val){
-        const localTime = moment(val).format("YYYY-MM-DD"); // store localTime
-        const proposedDate = localTime + "T19:00:00.000Z";
-        const docData = {
-            user: this.state.docId,
-            date: proposedDate
-        };
-
-        this.props.getDoctorTimeSlots(docData);
-        this.setState({ date: proposedDate, choosenSlot: "" });
-    }
-
     addTimeSlot = schedule => {
-        this.setState({
-          choosenSlot: schedule
-        });
-      };
+      this.setState({
+        choosenSlot: schedule,
+        confirmIsVisible: true,
+        // isVisible: false,
+      });
+    };
+
+    renderDocTimeSlots = schedules =>
+    schedules.schedule ? (
+      <ScrollView>
+        {schedules.schedule.map(schedule => (
+          <View key={null}>
+            {schedule === null ? (
+              <Text>No Bookings Yet</Text>
+            ) : (
+              schedule.timeSlots.map(booking => {
+                if (booking.reserved != "true") {
+                  return (
+                    <View style={styles.listitem} key={booking.value}>
+                      <Button
+                        inverted
+                        color="#9458AE"
+                        title= {booking.label}
+                        onPress={() => this.addTimeSlot(booking.label)}
+                      />
+                    </View>
+                  );
+                }
+              })
+            )}
+          </View>
+        ))}
+      </ScrollView>
+    ) : (
+      <Text>Sorry, no time slots available</Text>
+    );
 
     render() {
-        // const { navigation } = this.props;  
-        // const name = navigation.getParam('name');
-        // const location = navigation.getParam('location');
-        // const price = navigation.getParam('price');
-        // const rating = navigation.getParam('rating');
-        // const picture = navigation.getParam('picture');
-        // let docid = navigation.getParam('docId');
-        // this.setState({docId : docid});
-        // const schedules = this.props.schedule;
+        let schedules = this.props.schedule;
+
+        const dateSelected = val => {
+          const localTime = moment(val).format("YYYY-MM-DD"); // store localTime
+          const proposedDate = localTime + "T19:00:00.000Z";
+          const docData = {
+              user: this.state.docId,
+              date: proposedDate
+          };
+  
+          this.props.getDoctorTimeSlots(docData);
+          this.setState({ date: proposedDate, choosenSlot: "" });
+      }
 
         return (
             <View>
@@ -142,7 +235,7 @@ class DoctorProfile extends Component {
                   height={550}>
                   <View>
                     <ReactNativeCalendarStrip
-                      onDateSelected={this.dateSelected.bind(this)}
+                      onDateSelected={dateSelected}
                       
                       calendarAnimation={{ type: 'sequence', duration: 7 }}
                       daySelectionAnimation={{
@@ -162,16 +255,36 @@ class DoctorProfile extends Component {
                       disabledDateNumberStyle={{ color: 'grey' }}
                       iconContainer={{ flex: 0.1 }}
                     />
-                    <View>
-                    <FlatList
-                        data={this.state.schedules}
+                    <Overlay
+                      isVisible={this.state.confirmIsVisible} 
+                      onBackdropPress={() => this.setState({ confirmIsVisible: false })}
+                      animationType='fade'
+                      width={320}
+                      height={550}>
+                      <View>
+                        <Text style={styles.confirmModalHeader}>Appointment Details</Text>
+                        <View style={styles.confirmModalView}>
+                          <Text>Doctor: {this.state.docName}</Text>
+                          <Text>Patient: {this.state.patientName}</Text>
+                          <Text>Appointment Date: {this.state.date}</Text>
+                          <Text>TimeSlot: {this.state.choosenSlot}</Text>
+                        </View>
+                        <View style={styles.confirmButtonsView}>
+                          <Button title='Confirm' color='#9458AE' onPress={(this.handleConfirm.bind(this))}/>
+                          <Button title='Cancel' color='#9458AE' onPress={(this.handleCancel.bind(this))}/>
+                        </View>
+                      </View>
+                    </Overlay>
+                    {this.renderDocTimeSlots(schedules)}
+                    {/* <FlatList
+                        style={styles.flatlist}
+                        data={_.values(schedules)}
                         renderItem={({item}) => (<TimeSlotListItem
-                                    label={item.timeSlots}
+                                    label={item.label}
                                   />
                                 )}
-                        keyExtractor={item => item.id}
-                    />
-                    </View>
+                        keyExtractor={item => item.value}
+                    /> */}
                   </View>
                 </Overlay>
 

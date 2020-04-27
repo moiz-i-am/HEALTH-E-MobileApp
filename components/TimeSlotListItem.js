@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, StyleSheet, Text } from 'react-native';
 
 const styles = StyleSheet.create({
     timeText: {
@@ -7,7 +7,16 @@ const styles = StyleSheet.create({
     }
 })
 
+initialState = {
+    label: ''
+}
+
 class TimeSlotListItem extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = initialState;
+      }
 
     render() {
         return (

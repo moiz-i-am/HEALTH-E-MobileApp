@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   Alert,
   Button
 } from 'react-native';
@@ -35,7 +34,7 @@ class Login extends Component {
   componentWillReceiveProps(nextProps, {navigation}) {
     if (nextProps.auth.isAuthenticated) {
       const { user } = nextProps.auth;
-      this.props.navigation.navigate('Maps');
+      this.props.navigation.navigate('Appointments');
       // push user to signup when they login
     }
     if (nextProps.errors) {
@@ -49,7 +48,7 @@ class Login extends Component {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
       const { user } = this.props.auth;
-      this.props.navigation.navigate('Maps');
+      this.props.navigation.navigate('Appointments');
     }
   }
 

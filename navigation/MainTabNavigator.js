@@ -7,7 +7,7 @@ import DiscoverScreen from '../screens/DiscoverScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import Calander from './../screens/Calander';
-import Maps from './../screens/Maps';
+import AppointmentsScreen from './../screens/AppointmentsScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -70,21 +70,21 @@ SettingsStack.navigationOptions = {
 SettingsStack.path = '';
 
 
-const MapStack = createStackNavigator(
+const AppointmentStack = createStackNavigator(
   {
-    Maps: Maps,
+    Appointments: AppointmentsScreen,
   },
   config
 );
 
-MapStack.navigationOptions = {
-  tabBarLabel: 'Map',
+AppointmentStack.navigationOptions = {
+  tabBarLabel: 'Appointments',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-map' : 'md-map'} />
   ),
 };
 
-MapStack.path = '';
+AppointmentStack.path = '';
 
 const CalanderStack = createStackNavigator(
   {
@@ -106,7 +106,7 @@ CalanderStack.path = '';
 
 
 const tabNavigator = createBottomTabNavigator({
-  MapStack,
+  AppointmentStack,
   DiscoverStack,
   CalanderStack,
   ProfileStack,

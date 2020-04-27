@@ -119,7 +119,7 @@ class DoctorProfile extends Component {
         this.props.createAppointmentBooking(bookingData, this.state.token);
         // console.log("pat: " + bookingData.patient + "doc: " + bookingData.doctor);
         console.log('booking done....');
-        this.setState({ confirmIsVisible: false, success: true });
+        this.setState({ confirmIsVisible: false, isVisible: false, success: true });
         setTimeout(() => {
           this.setState({ success: false });
         }, 3000);

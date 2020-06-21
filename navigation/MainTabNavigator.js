@@ -8,6 +8,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import Calander from './../screens/Calander';
 import AppointmentsScreen from './../screens/AppointmentsScreen';
+import PrescriptionScreen from './../screens/PrescriptionScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -86,6 +87,22 @@ AppointmentStack.navigationOptions = {
 
 AppointmentStack.path = '';
 
+const PrescriptionStack = createStackNavigator(
+  {
+    Prescriptions: PrescriptionScreen,
+  },
+  config
+);
+
+PrescriptionStack.navigationOptions = {
+  tabBarLabel: 'Prescriptions',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-map' : 'md-map'} />
+  ),
+};
+
+PrescriptionStack.path = '';
+
 const CalanderStack = createStackNavigator(
   {
     Calander: Calander,
@@ -107,8 +124,8 @@ CalanderStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   AppointmentStack,
+  PrescriptionStack,
   DiscoverStack,
-  CalanderStack,
   ProfileStack,
   SettingsStack,
 });

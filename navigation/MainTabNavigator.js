@@ -3,12 +3,13 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
+
 import DiscoverScreen from '../screens/DiscoverScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import Calander from './../screens/Calander';
 import AppointmentsScreen from './../screens/AppointmentsScreen';
 import PrescriptionScreen from './../screens/PrescriptionScreen';
+
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -24,13 +25,16 @@ const DiscoverStack = createStackNavigator(
 
 DiscoverStack.navigationOptions = {
   tabBarLabel: 'Doctors',
+  tabBarOptions: { 
+    activeTintColor: '#9458AE',
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+          ? `ios-pulse${focused ? '' : '-outline'}`
+          : 'md-pulse'
       }
     />
   ),
@@ -47,6 +51,9 @@ const ProfileStack = createStackNavigator(
 
 ProfileStack.navigationOptions = {
   tabBarLabel: 'Profile',
+  tabBarOptions: { 
+    activeTintColor: '#9458AE',
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
   ),
@@ -63,8 +70,11 @@ const SettingsStack = createStackNavigator(
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
+  tabBarOptions: { 
+    activeTintColor: '#9458AE',
+  },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-cog' : 'md-cog'} />
   ),
 };
 
@@ -80,8 +90,11 @@ const AppointmentStack = createStackNavigator(
 
 AppointmentStack.navigationOptions = {
   tabBarLabel: 'Appointments',
+  tabBarOptions: { 
+    activeTintColor: '#9458AE',
+  },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-map' : 'md-map'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-list-box' : 'md-list-box'} />
   ),
 };
 
@@ -96,30 +109,15 @@ const PrescriptionStack = createStackNavigator(
 
 PrescriptionStack.navigationOptions = {
   tabBarLabel: 'Prescriptions',
+  tabBarOptions: { 
+    activeTintColor: '#9458AE',
+  },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-map' : 'md-map'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-paper' : 'md-paper'} />
   ),
 };
 
 PrescriptionStack.path = '';
-
-const CalanderStack = createStackNavigator(
-  {
-    Calander: Calander,
-  },
-  config
-);
-
-CalanderStack.navigationOptions = {
-  tabBarLabel: 'Calander',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-calendar' : 'md-calendar'} />
-  ),
-};
-
-CalanderStack.path = '';
-
-
 
 
 const tabNavigator = createBottomTabNavigator({
@@ -129,7 +127,5 @@ const tabNavigator = createBottomTabNavigator({
   ProfileStack,
   SettingsStack,
 });
-
-tabNavigator.path = '';
 
 export default tabNavigator;

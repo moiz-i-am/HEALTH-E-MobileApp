@@ -1,14 +1,16 @@
 import { AppLoading } from 'expo';
-import store from './store';
+import {store, presistor} from './store';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import React, { useState } from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View,ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
 
 import { Provider } from 'react-redux';
+
+import { PersistGate } from 'redux-persist/integration/react'
 
 
 export default function App(props) {
@@ -23,12 +25,26 @@ export default function App(props) {
       />
     );
   } else {
+
+const renderLoading = () => {
+      return (
+          <View>                
+              <ActivityIndicator size={"large"} />
+          </View>        
+      );    
+  };
+
     return (
       <Provider store={store}>
+        <PersistGate 
+                    persistor={presistor} 
+                    loading={()=>renderLoading()}
+                >
         <View style={styles.container}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
           <AppNavigator />
         </View>
+        </PersistGate>
       </Provider>
     );
   }

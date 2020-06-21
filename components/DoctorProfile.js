@@ -168,8 +168,8 @@ class DoctorProfile extends Component {
         }
     }
 
-    onBackPress(){
-        
+    onBackPress = (navigation)=>{
+      navigation.navigate('Discover');
     }
 
     addTimeSlot = schedule => {
@@ -290,7 +290,7 @@ class DoctorProfile extends Component {
 
                 <Header
                     backgroundColor='#9458AE'
-                    leftComponent={{ icon: 'arrow-back', color: '#fff', onPress: ()=> navigation.goBack(null) }}
+                    leftComponent={{ icon: 'arrow-back', color: '#fff', onPress: ()=> this.onBackPress(this.props.navigation) }}
                     centerComponent={{ text: this.state.name, style: { color: '#fff', fontSize: 20 } }}
                 />
                 <View style={styles.mainView}>

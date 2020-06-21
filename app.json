@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "NewProject",
-    "slug": "NewProject",
+    "name": "Health-e",
+    "slug": "Health-e",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -11,9 +11,9 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/app-icon.png",
+    "icon": "./assets/images/icon.png",
     "splash": {
-      "image": "./assets/images/app-icon.png",
+      "image": "./assets/images/L.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

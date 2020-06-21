@@ -1,31 +1,31 @@
 import React,{Component} from 'react';
-import {Button,InteractionManager,View,Text,StyleSheet} from 'react-native';
-import { ExpoConfigView } from '@expo/samples';
-import { NavigationEvents } from 'react-navigation';
+import {View,Text,StyleSheet} from 'react-native';
+import { connect } from "react-redux";
+import { Ionicons } from '@expo/vector-icons';
 
+import { logoutUser } from "../actions/authActions";
 
-
-
-export default class SettingsScreen extends Component {
+class SettingsScreen extends Component {
 
   logout(navigation) {
-    firebaseAPI.logoutUser()
-
-    InteractionManager.runAfterInteractions(() => {
-        navigation.navigate('Login')
-    })
+    this.props.logoutUser(navigation.navigate('Login'));
   }
 
-  /**
-   * Go ahead and delete ExpoConfigView and replace it with your content;
-   * we just wanted to give you a quick view of your config.
-   */
   render(){
   return(
     <View>
       <Text style={styles.button} onPress={()=>alert("button pressed")}>Edit Info</Text>
-      <Text style={styles.button} onPress={()=>alert("button pressed")}>Delete Account</Text>
-      <Text style={styles.buttonLogout} onPress={() => { this.logout(this.props.navigation) }}>Logout</Text>
+      <Text style={styles.button} onPress={()=>alert("button pressed")}>Delete Account <Ionicons
+      name={"md-trash"}
+      size={20}
+      marginHorizontal={30}
+    /></Text>
+      <Text style={styles.buttonLogout} onPress={() => { this.logout(this.props.navigation) }}>Logout <Ionicons
+      name={"md-log-out"}
+      size={20}
+      color={"#fff"}
+      marginHorizontal={30}
+    /></Text>
     </View>
   );
   }
@@ -61,8 +61,23 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
     marginHorizontal: 0,
     height: 56,
+    fontSize:20,
     padding: 15,
-    backgroundColor: '#66CCFF',
-    color:'#ffffff'
+    backgroundColor: '#9458AE',
+    color:'#ffffff',
+    // width:"50%",
+    // alignContent:"center"
   }
 });
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    user: state.user
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {logoutUser}
+)((SettingsScreen));

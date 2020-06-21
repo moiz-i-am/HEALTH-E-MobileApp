@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity, View, Text, StyleSheet, Button } from 'react-native';
 import { Overlay } from 'react-native-elements';
 
+
 const styles = StyleSheet.create({
     name: {
         fontSize: 20,
@@ -53,10 +54,11 @@ const styles = StyleSheet.create({
     prescriptionText:{
       flex: 1,
       width: 140
-      }
+      },
+      
     });
 
-    initialState = {
+const    initialState = {
         doctorName: '',
         date: '',
         prescriptionText: '',
@@ -82,7 +84,7 @@ class PrescriptionListItem extends Component {
                     <View>
                         <Text style={styles.modalHeader}>{this.state.doctorName}</Text>
                         <View style={styles.modalView}>
-                            <Text>Appointment Date: {new Date(this.state.date).toDateString()}</Text>
+                            {/* <Text>Appointment Date: {new Date(this.state.date).toDateString()}</Text> */}
                             <Text>{this.state.prescriptionText}</Text>
                         </View>
                     </View>

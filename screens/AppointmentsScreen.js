@@ -36,7 +36,7 @@ class AppointmentsScreen extends Component {
       patient: this.state.id
     };
 
-    axios.post(`http://192.168.1.5:3001/v1/booking/bookingList/patient`, data).then(res => {
+    axios.post(`http://192.168.1.67:3001/v1/booking/bookingList/patient`, data).then(res => {
       // this.setState({ bookings: res.data };
       setTimeout(() => {
         this.setState({ bookings: res.data });
@@ -68,7 +68,7 @@ class AppointmentsScreen extends Component {
 export default AppointmentsScreen;
 
 AppointmentsScreen.navigationOptions = {
-  title: 'My Appointments',
+  title: 'Upcoming Appointments',
   headerTitleStyle: { 
     textAlign:"center", 
     flex:1,

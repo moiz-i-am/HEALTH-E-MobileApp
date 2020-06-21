@@ -62,7 +62,7 @@ class PrescriptionScreen extends Component {
           patientId: this.state.id
         };
     
-        axios.post(`http://192.168.1.5:3001/v1/prescription/patient`, data).then(res => {
+        axios.post(`http://192.168.1.67:3001/v1/prescription/patient`, data).then(res => {
           // this.setState({ bookings: res.data };
           setTimeout(() => {
             this.setState({ prescriptions: res.data  });

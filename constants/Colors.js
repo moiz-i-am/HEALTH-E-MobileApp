@@ -11,4 +11,7 @@ export default {
   warningText: '#666804',
   noticeBackground: tintColor,
   noticeText: '#9458AE',
+  tabLabelDefault: '#ccc',
+  tabLabelSelected: tintColor,
+
 };

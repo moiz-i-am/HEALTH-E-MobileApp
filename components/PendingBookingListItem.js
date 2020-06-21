@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     }
     });
 
-    initialState = {
+const    initialState = {
         doctor: '',
         date: '',
         timeSlot: ''

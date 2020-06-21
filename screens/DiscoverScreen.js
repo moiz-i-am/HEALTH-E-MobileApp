@@ -13,7 +13,7 @@ class DiscoverScreen extends Component {
   }
   
   componentDidMount(){
-    axios.get("http://192.168.1.5:3001/v1/users").then(res => {
+    axios.get("http://192.168.1.67:3001/v1/users").then(res => {
       this.setState({ doctors: res.data});
     }).catch(error => console.log(error));
   }

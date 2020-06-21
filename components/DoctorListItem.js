@@ -44,7 +44,7 @@ button: {
 }
 });
 
-initialState = {
+const initialState = {
     name: '',
     picture: '',
     specialization: [],

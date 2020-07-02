@@ -71,6 +71,8 @@ AppointmentsScreen.navigationOptions = {
   title: 'Upcoming Appointments',
   headerTitleStyle: { 
     textAlign:"center", 
+    fontSize: 17,
     flex:1,
+    
 },
 };

@@ -88,7 +88,7 @@ class DoctorListItem extends Component {
                     </View>
                 </View>
                 <View style={styles.button}>
-                    <Button color='#9458AE' title='View Profile' onPress={()=> this.props.navigation.navigate('DoctorProfile',{ 
+                    <Button color='#990099' title='View Profile' onPress={()=> this.props.navigation.navigate('DoctorProfile',{ 
                         name: this.props.name,
                         picture: this.props.picture,
                         specialization: this.props.specializations,

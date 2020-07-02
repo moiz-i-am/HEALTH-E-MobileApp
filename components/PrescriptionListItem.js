@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         paddingTop: 30,
         height: 100,
         marginBottom: 20,
-        backgroundColor: '#9458AE',
+        backgroundColor: '#990099',
         fontWeight: "bold", 
         fontSize: 24,
         color: '#ffffff'
@@ -103,7 +103,7 @@ class PrescriptionListItem extends Component {
                     </View>
                 </View>
                 <View style={styles.button}>
-                    <Button color='#9458AE' title='View Details' onPress={() => this.setState({isVisible: true, doctorName: this.props.doctor,
+                    <Button color='#990099' title='View Details' onPress={() => this.setState({isVisible: true, doctorName: this.props.doctor,
                                                                                                 date: new Date(this.props.date).toDateString(),
                                                                                                 prescriptionText: this.props.prescriptionText})}
                     />

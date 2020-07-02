@@ -114,7 +114,7 @@ class Login extends Component {
               iconStyle={styles.icon}
               name='mail'
               size={22}
-              color='#9458AE'
+              color='#990099'
             />
           }
           label='Your Email Address'
@@ -129,7 +129,7 @@ class Login extends Component {
             <Icon
               name='lock'
               size={22}
-              color='#9458AE'
+              color='#990099'
               iconStyle={styles.icon}
             />
           }
@@ -141,7 +141,7 @@ class Login extends Component {
           onChangeText={(password) => this.setState({ password })} />
 
         <View style={styles.button}>
-          <Button color='#9458AE' title='Login' onPress={this.onButtonPress.bind(this)}/>
+          <Button color='#990099' title='Login' onPress={this.onButtonPress.bind(this)}/>
         </View>
         <Text style={{ marginTop: 30 }} onPress={() => this.onSignupListener()}>Not Registered? Signup</Text>
         
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     marginLeft: 20
   },
   textInputStyle: {
-    borderColor: '#9458AE'
+    borderColor: '#990099'
   },
   icon: {
     marginLeft: -15,

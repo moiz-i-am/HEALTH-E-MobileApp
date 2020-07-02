@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         paddingTop: 30,
         height: 100,
         marginBottom: 20,
-        backgroundColor: '#9458AE',
+        backgroundColor: '#990099',
         fontWeight: "bold", 
         fontSize: 24,
         color: '#ffffff'
@@ -127,6 +127,7 @@ PrescriptionScreen.navigationOptions = {
     title: 'My Prescriptions',
     headerTitleStyle: { 
       textAlign:"center", 
+      fontSize: 17,
       flex:1,
   },
   };

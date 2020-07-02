@@ -51,7 +51,8 @@ export default DiscoverScreen;
 DiscoverScreen.navigationOptions = {
   title: 'Doctors',
   headerTitleStyle: { 
-    textAlign:"center", 
+    textAlign:"center",
+    fontSize: 17, 
     flex:1 
   },
 };

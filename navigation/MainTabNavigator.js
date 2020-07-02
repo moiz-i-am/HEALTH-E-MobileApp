@@ -26,7 +26,7 @@ const DiscoverStack = createStackNavigator(
 DiscoverStack.navigationOptions = {
   tabBarLabel: 'Doctors',
   tabBarOptions: { 
-    activeTintColor: '#9458AE',
+    activeTintColor: '#990099',
   },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -52,7 +52,7 @@ const ProfileStack = createStackNavigator(
 ProfileStack.navigationOptions = {
   tabBarLabel: 'Profile',
   tabBarOptions: { 
-    activeTintColor: '#9458AE',
+    activeTintColor: '#990099',
   },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
@@ -71,7 +71,7 @@ const SettingsStack = createStackNavigator(
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
   tabBarOptions: { 
-    activeTintColor: '#9458AE',
+    activeTintColor: '#990099',
   },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-cog' : 'md-cog'} />
@@ -91,7 +91,7 @@ const AppointmentStack = createStackNavigator(
 AppointmentStack.navigationOptions = {
   tabBarLabel: 'Appointments',
   tabBarOptions: { 
-    activeTintColor: '#9458AE',
+    activeTintColor: '#990099',
   },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-list-box' : 'md-list-box'} />
@@ -110,7 +110,7 @@ const PrescriptionStack = createStackNavigator(
 PrescriptionStack.navigationOptions = {
   tabBarLabel: 'Prescriptions',
   tabBarOptions: { 
-    activeTintColor: '#9458AE',
+    activeTintColor: '#990099',
   },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-paper' : 'md-paper'} />

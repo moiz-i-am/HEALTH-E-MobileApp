@@ -35,6 +35,7 @@ SettingsScreen.navigationOptions = {
   title: 'Settings',
   headerTitleStyle: { 
     textAlign:"center", 
+    fontSize: 17,
     flex:1 
 },
 };
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     height: 56,
     fontSize:20,
     padding: 15,
-    backgroundColor: '#9458AE',
+    backgroundColor: '#990099',
     color:'#ffffff',
     // width:"50%",
     // alignContent:"center"

@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
       paddingTop: 30,
       height: 100,
       marginBottom: 20,
-      backgroundColor: '#9458AE',
+      backgroundColor: '#990099',
       fontWeight: "bold", 
       fontSize: 24,
       color: '#ffffff'
@@ -194,7 +194,7 @@ class DoctorProfile extends Component {
                     <View style={styles.listitem} key={booking.value}>
                       <Button
                         inverted
-                        color="#9458AE"
+                        color="#990099"
                         title= {booking.label}
                         onPress={() => this.addTimeSlot(booking.label)}
                       />
@@ -226,7 +226,7 @@ class DoctorProfile extends Component {
       }
 
         return (
-            <View>
+            <ScrollView>
                 <Overlay 
                   isVisible={this.state.isVisible} 
                   onBackdropPress={() => this.setState({ isVisible: false })}
@@ -246,7 +246,7 @@ class DoctorProfile extends Component {
                       }}
                       style={{ height: 100, paddingTop: 20, paddingBottom: 10 }}
                       calendarHeaderStyle={{ color: 'white' }}
-                      calendarColor={'#9458AE'}
+                      calendarColor={'#990099'}
                       dateNumberStyle={{ color: 'white' }}
                       dateNameStyle={{ color: 'white' }}
                       highlightDateNumberStyle={{ color: 'yellow' }}
@@ -270,8 +270,8 @@ class DoctorProfile extends Component {
                           <Text>TimeSlot: {this.state.choosenSlot}</Text>
                         </View>
                         <View style={styles.confirmButtonsView}>
-                          <Button title='Confirm' color='#9458AE' onPress={(this.handleConfirm.bind(this))}/>
-                          <Button title='Cancel' color='#9458AE' onPress={(this.handleCancel.bind(this))}/>
+                          <Button title='Confirm' color='#990099' onPress={(this.handleConfirm.bind(this))}/>
+                          <Button title='Cancel' color='#990099' onPress={(this.handleCancel.bind(this))}/>
                         </View>
                       </View>
                     </Overlay>
@@ -289,7 +289,7 @@ class DoctorProfile extends Component {
                 </Overlay>
 
                 <Header
-                    backgroundColor='#9458AE'
+                    backgroundColor='#990099'
                     leftComponent={{ icon: 'arrow-back', color: '#fff', onPress: ()=> this.onBackPress(this.props.navigation) }}
                     centerComponent={{ text: this.state.name, style: { color: '#fff', fontSize: 20 } }}
                 />
@@ -318,10 +318,10 @@ class DoctorProfile extends Component {
                     </View>
                     <Text style={styles.locationText}>{this.state.location}</Text>
                     <View style={styles.button}>
-                        <Button color='#9458AE' title='Book Appointment' onPress={(this.onButtonPress.bind(this))}/>
+                        <Button color='#990099' title='Book Appointment' onPress={(this.onButtonPress.bind(this))}/>
                     </View>
                 </View>
-            </View>
+            </ScrollView>
             
         );
     }

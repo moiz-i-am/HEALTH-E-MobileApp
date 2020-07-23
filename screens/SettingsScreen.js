@@ -1,45 +1,51 @@
-import React,{Component} from 'react';
-import {View,Text,StyleSheet} from 'react-native';
-import { connect } from "react-redux";
-import { Ionicons } from '@expo/vector-icons';
+import React, { Component } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
+import { Ionicons } from '@expo/vector-icons'
 
-import { logoutUser } from "../actions/authActions";
+import { logoutUser } from '../actions/authActions'
 
 class SettingsScreen extends Component {
-
   logout(navigation) {
-    this.props.logoutUser(navigation.navigate('Login'));
+    this.props.logoutUser(navigation.navigate('Login'))
   }
 
-  render(){
-  return(
-    <View>
-      <Text style={styles.button} onPress={()=>alert("button pressed")}>Edit Info</Text>
-      <Text style={styles.button} onPress={()=>alert("button pressed")}>Delete Account <Ionicons
-      name={"md-trash"}
-      size={20}
-      marginHorizontal={30}
-    /></Text>
-      <Text style={styles.buttonLogout} onPress={() => { this.logout(this.props.navigation) }}>Logout <Ionicons
-      name={"md-log-out"}
-      size={20}
-      color={"#fff"}
-      marginHorizontal={30}
-    /></Text>
-    </View>
-  );
+  render() {
+    return (
+      <View>
+        <Text style={styles.button} onPress={() => alert('button pressed')}>
+          Edit Info
+        </Text>
+        <Text style={styles.button} onPress={() => alert('button pressed')}>
+          Delete Account{' '}
+          <Ionicons name={'md-trash'} size={20} marginHorizontal={30} />
+        </Text>
+        <Text
+          style={styles.buttonLogout}
+          onPress={() => {
+            this.logout(this.props.navigation)
+          }}>
+          Logout{' '}
+          <Ionicons
+            name={'md-log-out'}
+            size={20}
+            color={'#fff'}
+            marginHorizontal={30}
+          />
+        </Text>
+      </View>
+    )
   }
 }
 
 SettingsScreen.navigationOptions = {
   title: 'Settings',
-  headerTitleStyle: { 
-    textAlign:"center", 
+  headerTitleStyle: {
+    textAlign: 'center',
     fontSize: 17,
-    flex:1 
-},
-};
-
+    flex: 1,
+  },
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -49,36 +55,33 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   button: {
-    fontWeight:"bold",
+    fontWeight: 'bold',
     marginHorizontal: 0,
     height: 56,
     padding: 15,
-    paddingLeft:20,
+    paddingLeft: 20,
     borderBottomColor: '#007ACC',
     borderBottomWidth: 1,
   },
-  buttonLogout:{
+  buttonLogout: {
     textAlign: 'center',
-    fontWeight:"bold",
+    fontWeight: 'bold',
     marginHorizontal: 0,
     height: 56,
-    fontSize:20,
+    fontSize: 20,
     padding: 15,
     backgroundColor: '#990099',
-    color:'#ffffff',
+    color: '#ffffff',
     // width:"50%",
     // alignContent:"center"
-  }
-});
+  },
+})
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     auth: state.auth,
-    user: state.user
-  };
-};
+    user: state.user,
+  }
+}
 
-export default connect(
-  mapStateToProps,
-  {logoutUser}
-)((SettingsScreen));
+export default connect(mapStateToProps, { logoutUser })(SettingsScreen)

@@ -1,4 +1,4 @@
-const tintColor = '#990099';
+const tintColor = '#990099'
 
 export default {
   tintColor,
@@ -13,5 +13,4 @@ export default {
   noticeText: '#990099',
   tabLabelDefault: '#ccc',
   tabLabelSelected: tintColor,
-
-};
+}

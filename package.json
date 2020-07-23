@@ -6,7 +6,21 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "prettier": "prettier 'src/**/*.js'",
+    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "jsxBracketSameLine": true,
+    "semi": false,
+    "singleQuote": true
   },
   "jest": {
     "preset": "jest-expo"
@@ -52,7 +66,11 @@
   },
   "devDependencies": {
     "babel-preset-expo": "^7.0.0",
-    "jest-expo": "^35.0.0"
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.2.5",
+    "jest-expo": "^35.0.0",
+    "lint-staged": "^10.2.11"
   },
   "private": true
 }

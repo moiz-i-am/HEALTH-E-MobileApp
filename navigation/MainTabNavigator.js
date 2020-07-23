@@ -1,31 +1,33 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import React from 'react'
+import { Platform } from 'react-native'
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+} from 'react-navigation'
 
-import TabBarIcon from '../components/TabBarIcon';
+import TabBarIcon from '../components/TabBarIcon'
 
-import DiscoverScreen from '../screens/DiscoverScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import SettingsScreen from '../screens/SettingsScreen';
-import AppointmentsScreen from './../screens/AppointmentsScreen';
-import PrescriptionScreen from './../screens/PrescriptionScreen';
-
+import FindDoctorsScreen from '../screens/FindDoctorsScreen'
+import ProfileScreen from '../screens/ProfileScreen'
+import SettingsScreen from '../screens/SettingsScreen'
+import AppointmentsScreen from './../screens/AppointmentsScreen'
+import PrescriptionScreen from './../screens/PrescriptionScreen'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
-});
+})
 
-const DiscoverStack = createStackNavigator(
+const FindDoctorsStack = createStackNavigator(
   {
-    Discover: DiscoverScreen,
+    FindDoctors: FindDoctorsScreen,
   },
   config
-);
+)
 
-DiscoverStack.navigationOptions = {
+FindDoctorsStack.navigationOptions = {
   tabBarLabel: 'Doctors',
-  tabBarOptions: { 
+  tabBarOptions: {
     activeTintColor: '#990099',
   },
   tabBarIcon: ({ focused }) => (
@@ -38,94 +40,104 @@ DiscoverStack.navigationOptions = {
       }
     />
   ),
-};
+}
 
-DiscoverStack.path = '';
+FindDoctorsStack.path = ''
 
 const ProfileStack = createStackNavigator(
   {
     Profile: ProfileScreen,
   },
   config
-);
+)
 
 ProfileStack.navigationOptions = {
   tabBarLabel: 'Profile',
-  tabBarOptions: { 
+  tabBarOptions: {
     activeTintColor: '#990099',
   },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'}
+    />
   ),
-};
+}
 
-ProfileStack.path = '';
+ProfileStack.path = ''
 
 const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
   },
   config
-);
+)
 
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
-  tabBarOptions: { 
+  tabBarOptions: {
     activeTintColor: '#990099',
   },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-cog' : 'md-cog'} />
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-cog' : 'md-cog'}
+    />
   ),
-};
+}
 
-SettingsStack.path = '';
-
+SettingsStack.path = ''
 
 const AppointmentStack = createStackNavigator(
   {
     Appointments: AppointmentsScreen,
   },
   config
-);
+)
 
 AppointmentStack.navigationOptions = {
   tabBarLabel: 'Appointments',
-  tabBarOptions: { 
+  tabBarOptions: {
     activeTintColor: '#990099',
   },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-list-box' : 'md-list-box'} />
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-list-box' : 'md-list-box'}
+    />
   ),
-};
+}
 
-AppointmentStack.path = '';
+AppointmentStack.path = ''
 
 const PrescriptionStack = createStackNavigator(
   {
     Prescriptions: PrescriptionScreen,
   },
   config
-);
+)
 
 PrescriptionStack.navigationOptions = {
   tabBarLabel: 'Prescriptions',
-  tabBarOptions: { 
+  tabBarOptions: {
     activeTintColor: '#990099',
   },
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-paper' : 'md-paper'} />
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-paper' : 'md-paper'}
+    />
   ),
-};
+}
 
-PrescriptionStack.path = '';
-
+PrescriptionStack.path = ''
 
 const tabNavigator = createBottomTabNavigator({
   AppointmentStack,
   PrescriptionStack,
-  DiscoverStack,
+  FindDoctorsStack,
   ProfileStack,
   SettingsStack,
-});
+})
 
-export default tabNavigator;
+export default tabNavigator

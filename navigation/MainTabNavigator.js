@@ -8,10 +8,10 @@ import {
 import TabBarIcon from '../components/TabBarIcon'
 
 import FindDoctorsScreen from '../screens/FindDoctorsScreen'
-import ProfileScreen from '../screens/ProfileScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import AppointmentsScreen from './../screens/AppointmentsScreen'
 import PrescriptionScreen from './../screens/PrescriptionScreen'
+import LabResultsScreen from '../screens/LabResustsScreen'
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -44,27 +44,27 @@ FindDoctorsStack.navigationOptions = {
 
 FindDoctorsStack.path = ''
 
-const ProfileStack = createStackNavigator(
+const LabStack = createStackNavigator(
   {
-    Profile: ProfileScreen,
+    Lab: LabResultsScreen,
   },
   config
 )
 
-ProfileStack.navigationOptions = {
-  tabBarLabel: 'Profile',
+LabStack.navigationOptions = {
+  tabBarLabel: 'Lab results',
   tabBarOptions: {
     activeTintColor: '#990099',
   },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'}
+      name={Platform.OS === 'ios' ? 'ios-flask-outline' : 'md-flask'}
     />
   ),
 }
 
-ProfileStack.path = ''
+LabStack.path = ''
 
 const SettingsStack = createStackNavigator(
   {
@@ -136,7 +136,7 @@ const tabNavigator = createBottomTabNavigator({
   AppointmentStack,
   PrescriptionStack,
   FindDoctorsStack,
-  ProfileStack,
+  LabStack,
   SettingsStack,
 })
 

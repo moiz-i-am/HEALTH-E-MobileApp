@@ -1,10 +1,10 @@
-import React from 'react'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 
 import MainTabNavigator from './MainTabNavigator'
 import Login from './../screens/Login'
 import Signup from './../screens/Signup'
 import DoctorProfile from './../components/DoctorProfile'
+import ShowProfileScreen from './../screens/ShowProfileScreen'
 
 export default createAppContainer(
   createSwitchNavigator({
@@ -14,5 +14,6 @@ export default createAppContainer(
     Signup: Signup,
     Main: MainTabNavigator,
     DoctorProfile: DoctorProfile,
+    Profile: ShowProfileScreen,
   })
 )

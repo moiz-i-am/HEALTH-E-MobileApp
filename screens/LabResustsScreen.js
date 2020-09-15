@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { View, FlatList, AsyncStorage } from 'react-native'
-import PendingBookingListItem from '../components/PendingBookingListItem'
+import LabResultCard from '../components/LabResultCard'
 
-class AppointmentsScreen extends Component {
+class LabResultsScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
       id: '',
-      bookings: [],
+      tests: [],
     }
   }
 
@@ -30,16 +30,12 @@ class AppointmentsScreen extends Component {
       })
     }
 
-    const data = {
-      patient: this.state.id,
-    }
-
     axios
-      .post(`http://192.168.1.11:3001/v1/booking/bookingList/patient`, data)
+      .get(
+        `http://192.168.1.11:3001/v1/uploading/testResultsPatient/${this.state.id}`
+      )
       .then((res) => {
-        setTimeout(() => {
-          this.setState({ bookings: res.data })
-        }, 2000)
+        this.setState({ tests: res.data.posts })
       })
   }
 
@@ -47,19 +43,16 @@ class AppointmentsScreen extends Component {
     return (
       <View>
         <FlatList
-          data={this.state.bookings}
+          data={this.state.tests}
           renderItem={({ item }) => {
-            if (new Date(item.date) > new Date()) {
-              return (
-                <PendingBookingListItem
-                  date={item.date}
-                  doctor={item.doctor.name}
-                  doctorId={item.doctor._id}
-                  patientId={item.patient}
-                  timeSlot={item.timeSlot}
-                />
-              )
-            }
+            return (
+              <LabResultCard
+                navigation={this.props.navigation}
+                testId={item._id}
+                file={item.fileURL}
+                labId={item.labId}
+              />
+            )
           }}
           keyExtractor={(item) => item.id}
         />
@@ -68,10 +61,10 @@ class AppointmentsScreen extends Component {
   }
 }
 
-export default AppointmentsScreen
+export default LabResultsScreen
 
-AppointmentsScreen.navigationOptions = {
-  title: 'Upcoming Appointments',
+LabResultsScreen.navigationOptions = {
+  title: 'Lab Results',
   headerTitleStyle: {
     textAlign: 'center',
     fontSize: 17,

@@ -36,7 +36,7 @@ export const registerLab = (labData, history) => (dispatch) => {
 
 export const registerUser = (user, history) => (dispatch) => {
   axios
-    .post('http://192.168.1.67:3001/v1/users', user)
+    .post('http://192.168.1.11:3001/v1/users', user)
     .then((res) => {
       history.push('/Login')
       console.log(res.data)
@@ -53,7 +53,7 @@ export const registerUser = (user, history) => (dispatch) => {
 
 export const loginUser = (user) => (dispatch) => {
   axios
-    .post('http://192.168.1.67:3001/v1/auth/login', user)
+    .post('http://192.168.1.11:3001/v1/auth/login', user)
     .then((res) => {
       let token = res.data
       token = JSON.stringify(token)

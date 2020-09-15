@@ -10,12 +10,21 @@ class SettingsScreen extends Component {
     this.props.logoutUser(navigation.navigate('Login'))
   }
 
+  showProfileHandler = (navigation) => {
+    navigation.navigate('Profile')
+  }
+
   render() {
     return (
       <View>
-        <Text style={styles.button} onPress={() => alert('button pressed')}>
-          Edit Info
+        <Text
+          style={styles.button}
+          onPress={() => {
+            this.showProfileHandler(this.props.navigation)
+          }}>
+          Profile
         </Text>
+
         <Text style={styles.button} onPress={() => alert('button pressed')}>
           Delete Account{' '}
           <Ionicons name={'md-trash'} size={20} marginHorizontal={30} />
@@ -60,7 +69,8 @@ const styles = StyleSheet.create({
     height: 56,
     padding: 15,
     paddingLeft: 20,
-    borderBottomColor: '#007ACC',
+    color: '#333333',
+    borderBottomColor: '#990099',
     borderBottomWidth: 1,
   },
   buttonLogout: {

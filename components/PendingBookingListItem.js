@@ -153,6 +153,7 @@ class PendingBookingListItem extends Component {
       date: '',
       timeSlot: '',
       notification: false,
+      dateOfAppointment: this.props.date,
     }
   }
 
@@ -279,6 +280,10 @@ class PendingBookingListItem extends Component {
   }
 
   render() {
+    console.log(this.props.date)
+    // converting date to proper booked
+    const d = new Date(this.state.dateOfAppointment)
+    d.setDate(d.getDate() - 1)
     // GUI
     return (
       <TouchableOpacity activeOpacity={1} style={styles.listItem}>
@@ -288,9 +293,7 @@ class PendingBookingListItem extends Component {
               <Text style={styles.name}>{this.props.doctor}</Text>
             </View>
             <View style={styles.subView2}>
-              <Text>
-                Date of Appointment: {new Date(this.props.date).toDateString()}
-              </Text>
+              <Text>Date of Appointment: {new Date(d).toDateString()}</Text>
               <Text>Time of Appointment: {this.props.timeSlot}</Text>
             </View>
           </View>

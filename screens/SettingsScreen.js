@@ -10,20 +10,20 @@ class SettingsScreen extends Component {
     this.props.logoutUser(navigation.navigate('Login'))
   }
 
-  showProfileHandler = (navigation) => {
-    navigation.navigate('Profile')
-  }
+  // showProfileHandler = (navigation) => {
+  //   navigation.navigate('Profile')
+  // }
 
   render() {
     return (
       <View>
-        <Text
+        {/* <Text
           style={styles.button}
           onPress={() => {
             this.showProfileHandler(this.props.navigation)
           }}>
           Profile
-        </Text>
+        </Text> */}
 
         <Text style={styles.button} onPress={() => alert('button pressed')}>
           Delete Account{' '}

@@ -70,13 +70,13 @@ class DoctorListItem extends Component {
     }
 
     if(this.props.price === null) {
-      charges = <Text>Price not defined</Text>
+      charges = <Text>Price not set</Text>
     } else {
-      charges = <Text>{this.props.price}</Text>
+      charges = <Text>{this.props.price} PKR</Text>
     }
 
     if(this.props.location === "") {
-      locale = <Text>Location not defined</Text>
+      locale = <Text>Location not provided</Text>
     } else {
       locale = <Text>{this.props.location}</Text>
     }
@@ -86,7 +86,7 @@ class DoctorListItem extends Component {
         <View style={styles.mainView}>
           <View style={styles.leftView}>
             <View style={styles.subView1}>
-              <Avatar rounded source={{ uri: this.props.picture }} />
+              <Avatar rounded source={{ uri: this.state.picture }} />
               <Text style={styles.name}>{this.props.name}</Text>
             </View>
             <View style={styles.subView2}>
@@ -113,7 +113,7 @@ class DoctorListItem extends Component {
             onPress={() =>
               this.props.navigation.navigate('DoctorProfile', {
                 name: this.props.name,
-                picture: this.props.picture,
+                picture: this.state.picture,
                 specialization: this.props.specializations,
                 rating: this.props.rating,
                 price: this.props.price,

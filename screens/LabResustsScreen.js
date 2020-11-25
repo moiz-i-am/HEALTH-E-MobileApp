@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { View, FlatList, AsyncStorage } from 'react-native'
 import LabResultCard from '../components/LabResultCard'
+import ListEmpty from '../components/ListEmpty'
 
 class LabResultsScreen extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class LabResultsScreen extends Component {
 
     axios
       .get(
-        `http://192.168.86.24:3001/v1/uploading/testResultsPatient/${this.state.id}`
+        `http://192.168.1.5:3001/v1/uploading/testResultsPatient/${this.state.id}`
       )
       .then((res) => {
         this.setState({ tests: res.data.posts })
@@ -44,6 +45,7 @@ class LabResultsScreen extends Component {
       <View>
         <FlatList
           data={this.state.tests}
+          ListEmptyComponent={<ListEmpty />}
           renderItem={({ item }) => {
             return (
               <LabResultCard

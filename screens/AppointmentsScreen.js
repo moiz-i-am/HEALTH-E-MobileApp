@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { View, FlatList, AsyncStorage } from 'react-native'
 import PendingBookingListItem from '../components/PendingBookingListItem'
+import ListEmpty from '../components/ListEmpty'
 
 class AppointmentsScreen extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class AppointmentsScreen extends Component {
     }
 
     axios
-      .post(`http://192.168.86.24:3001/v1/booking/bookingList/patient`, data)
+      .post(`http://192.168.1.5:3001/v1/booking/bookingList/patient`, data)
       .then((res) => {
         setTimeout(() => {
           this.setState({ bookings: res.data })
@@ -48,6 +49,7 @@ class AppointmentsScreen extends Component {
       <View>
         <FlatList
           data={this.state.bookings}
+          ListEmptyComponent={<ListEmpty />}
           renderItem={({ item }) => {
             if (new Date(item.date) > new Date()) {
               return (

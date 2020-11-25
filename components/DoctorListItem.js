@@ -60,6 +60,27 @@ class DoctorListItem extends Component {
   }
 
   render() {
+    let speciality;
+    let charges;
+    let locale;
+    if(this.props.specialization === []) {
+      speciality = <Text>No Specialization</Text>
+    } else {
+      speciality = <Text>{this.props.specialization}</Text>
+    }
+
+    if(this.props.price === null) {
+      charges = <Text>Price not defined</Text>
+    } else {
+      charges = <Text>{this.props.price}</Text>
+    }
+
+    if(this.props.location === "") {
+      locale = <Text>Location not defined</Text>
+    } else {
+      locale = <Text>{this.props.location}</Text>
+    }
+
     return (
       <TouchableOpacity activeOpacity={1} style={styles.listItem}>
         <View style={styles.mainView}>
@@ -69,7 +90,7 @@ class DoctorListItem extends Component {
               <Text style={styles.name}>{this.props.name}</Text>
             </View>
             <View style={styles.subView2}>
-              <Text>Urologist, Child Specialist</Text>
+              <Text>{speciality}</Text>
             </View>
           </View>
           <View style={styles.rightView}>
@@ -81,8 +102,8 @@ class DoctorListItem extends Component {
               readonly={true}
               startingValue={this.props.rating}
             />
-            <Text>PKR 200</Text>
-            <Text>{this.props.location}</Text>
+            <Text>{charges}</Text>
+            <Text>{locale}</Text>
           </View>
         </View>
         <View style={styles.button}>

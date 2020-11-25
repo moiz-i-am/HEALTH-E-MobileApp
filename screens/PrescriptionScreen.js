@@ -3,6 +3,7 @@ import { View, FlatList, TouchableOpacity, StyleSheet } from 'react-native'
 import axios from 'axios'
 import PrescriptionListItem from '../components/PrescriptionListItem'
 import { AsyncStorage } from 'react-native'
+import ListEmpty from '../components/ListEmpty'
 
 const styles = StyleSheet.create({
   confirmModalHeader: {
@@ -60,7 +61,7 @@ class PrescriptionScreen extends Component {
     }
 
     axios
-      .post(`http://192.168.86.24:3001/v1/prescription/patient`, data)
+      .post(`http://192.168.1.5:3001/v1/prescription/patient`, data)
       .then((res) => {
         setTimeout(() => {
           this.setState({ prescriptions: res.data })
@@ -84,6 +85,7 @@ class PrescriptionScreen extends Component {
         <View>
           <FlatList
             data={this.state.prescriptions}
+            ListEmptyComponent={<ListEmpty />}
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => this.handleOverlay}>
                 <PrescriptionListItem

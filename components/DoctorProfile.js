@@ -221,6 +221,21 @@ class DoctorProfile extends Component {
     )
 
   render() {
+    let charges;
+    let locale;
+
+    if(this.state.price === null) {
+      charges = <Text>Price not defined</Text>
+    } else {
+      charges = <Text>{this.state.price}</Text>
+    }
+
+    if(this.state.location === "") {
+      locale = <Text>Location not defined</Text>
+    } else {
+      locale = <Text>{this.state.location}</Text>
+    }
+
     let schedules = this.props.schedule
 
     const dateSelected = (val) => {
@@ -306,7 +321,7 @@ class DoctorProfile extends Component {
             onPress: () => this.onBackPress(this.props.navigation),
           }}
           centerComponent={{
-            text: this.state.name,
+            text: this.state.docName,
             style: { color: '#fff', fontSize: 20 },
           }}
         />
@@ -334,9 +349,9 @@ class DoctorProfile extends Component {
               readonly={true}
               startingValue={this.state.rating}
             />
-            <Text style={styles.price}>PKR 200</Text>
+            <Text style={styles.price}>{charges}</Text>
           </View>
-          <Text style={styles.locationText}>{this.state.location}</Text>
+          <Text style={styles.locationText}>{locale}</Text>
           <View style={styles.button}>
             <Button
               color="#990099"

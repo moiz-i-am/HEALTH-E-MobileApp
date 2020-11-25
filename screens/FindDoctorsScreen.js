@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { View, FlatList } from 'react-native'
 import DoctorListItem from '../components/DoctorListItem'
+import ListEmpty from '../components/ListEmpty'
 
 class FindDoctorsScreen extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class FindDoctorsScreen extends Component {
 
   componentDidMount() {
     axios
-      .get('http://192.168.86.24:3001/v1/users')
+      .get('http://192.168.1.5:3001/v1/users')
       .then((res) => {
         this.setState({ doctors: res.data })
       })
@@ -25,6 +26,7 @@ class FindDoctorsScreen extends Component {
       <View>
         <FlatList
           data={this.state.doctors}
+          ListEmptyComponent={<ListEmpty />}
           renderItem={({ item }) => {
             if (item.role === 'doctor') {
               return (
@@ -37,11 +39,11 @@ class FindDoctorsScreen extends Component {
                   price={item.price}
                   docId={item.id}
                   location={
-                    item.location_city +
-                    ', ' +
-                    item.location_state +
-                    ', ' +
-                    item.location_country
+                    item.location_city //+
+                    // ', ' +
+                    // item.location_state +
+                    // ', ' +
+                    // item.location_country
                   }
                 />
               )

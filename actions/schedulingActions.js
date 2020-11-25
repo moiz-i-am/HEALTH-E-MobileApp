@@ -3,7 +3,7 @@ import { GET_TIME_DATA, GET_ERRORS } from './types'
 
 export const getDoctorTimeSlots = (docData) => {
   const request = axios.post(
-    `http://192.168.1.11:3001/v1/scheduling/timeslots`,
+    `http://192.168.86.24:3001/v1/scheduling/timeslots`,
     docData
   )
   return (dispatch) => {

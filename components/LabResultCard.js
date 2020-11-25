@@ -74,11 +74,11 @@ class PrescriptionListItem extends Component {
   openFileHandler = (testId) => {
     const postId = testId
     axios
-      .get(`http://192.168.1.11:3001/v1/uploading/labUpload/${postId}`)
+      .get(`http://192.168.86.24:3001/v1/uploading/labUpload/${postId}`)
       .then((res) => {
         console.log(res.data.post)
         this.setState({
-          file: 'http://192.168.1.11:3001/' + res.data.post.fileURL,
+          file: 'http://192.168.86.24:3001/' + res.data.post.fileURL,
         })
       })
       .catch((err) => {

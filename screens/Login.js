@@ -153,9 +153,9 @@ class Login extends Component {
             onPress={this.onButtonPress.bind(this)}
           />
         </View>
-        <Text style={{ marginTop: 30 }} onPress={() => this.onSignupListener()}>
+        {/* <Text style={{ marginTop: 30 }} onPress={() => this.onSignupListener()}>
           Not Registered? Signup
-        </Text>
+        </Text> */}
       </View>
     )
   }

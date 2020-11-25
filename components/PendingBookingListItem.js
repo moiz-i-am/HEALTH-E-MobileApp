@@ -8,7 +8,7 @@ import {
   Vibration,
   Platform,
 } from 'react-native'
-import { Notifications } from 'expo'
+import * as Notifications from 'expo-notifications'
 import * as Permissions from 'expo-permissions'
 import Constants from 'expo-constants'
 import moment from 'moment'
@@ -172,7 +172,7 @@ class PendingBookingListItem extends Component {
         alert('Failed to get push token for push notification!')
         return
       }
-      token = await Notifications.getExpoPushTokenAsync()
+      const token = await Notifications.getExpoPushTokenAsync()
       console.log(token)
       expoToken = token
       this.setState({ expoPushToken: token })
@@ -181,7 +181,7 @@ class PendingBookingListItem extends Component {
     }
 
     if (Platform.OS === 'android') {
-      Notifications.createChannelAndroidAsync('default', {
+      Notifications.addNotificationResponseReceivedListener('default', {
         name: 'default',
         sound: true,
         priority: 'max',
@@ -198,7 +198,8 @@ class PendingBookingListItem extends Component {
     // notification (rather than just tapping the app icon to open it),
     // this function will fire on the next tick after the app starts
     // with the notification data.
-    this._notificationSubscription = Notifications.addListener(
+
+    this._notificationSubscription = Notifications.addNotificationReceivedListener(
       this._handleNotification
     )
 
@@ -263,7 +264,7 @@ class PendingBookingListItem extends Component {
   // used the function inside to give its access to backgroundFetch
   pushNotification = () => {
     sendPushNotification(
-      this.state.expoPushToken,
+      this.state.expoPushToken.data,
       `${
         ' With: ' +
         this.props.doctor +
@@ -298,7 +299,10 @@ class PendingBookingListItem extends Component {
             </View>
           </View>
         </View>
-        {/* <Button title={'Press to Send Notification'} onPress={() => this.pushNotification()} /> */}
+        {/* <Button
+          title={'Press to Send Notification'}
+          onPress={() => this.registerForPushNotificationsAsync()}
+        /> */}
       </TouchableOpacity>
     )
   }

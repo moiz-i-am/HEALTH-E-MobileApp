@@ -14,7 +14,7 @@ class FindDoctorsScreen extends Component {
 
   componentDidMount() {
     axios
-      .get('http://192.168.1.5:3001/v1/users')
+      .get('http://192.168.1.14:3001/v1/users')
       .then((res) => {
         this.setState({ doctors: res.data })
       })

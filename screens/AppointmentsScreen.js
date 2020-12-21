@@ -36,7 +36,7 @@ class AppointmentsScreen extends Component {
     }
 
     axios
-      .post(`http://192.168.1.5:3001/v1/booking/bookingList/patient`, data)
+      .post(`http://192.168.1.14:3001/v1/booking/bookingList/patient`, data)
       .then((res) => {
         setTimeout(() => {
           this.setState({ bookings: res.data })

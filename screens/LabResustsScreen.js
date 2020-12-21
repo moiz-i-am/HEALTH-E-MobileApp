@@ -33,7 +33,7 @@ class LabResultsScreen extends Component {
 
     axios
       .get(
-        `http://192.168.1.5:3001/v1/uploading/testResultsPatient/${this.state.id}`
+        `http://192.168.1.14:3001/v1/uploading/testResultsPatient/${this.state.id}`
       )
       .then((res) => {
         this.setState({ tests: res.data.posts })
